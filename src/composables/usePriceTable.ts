@@ -9,22 +9,22 @@ export const usePriceTable = () => {
     const hoveredCell = ref<HoveredCell | null>(null)
     const showMore = ref<boolean>(false);
     const selectedPrice = ref<SelectedPrice | null>(null)
-    const selectedSize = ref<string>('A4');
+    const selectedSize = ref<string>('b4');
     const paperSizes = [
         {
-            value: 'A4',
+            value: 'a4',
             label: 'A4',
         },
         {
-            value: 'A5',
+            value: 'a5',
             label: 'A5',
         },
         {
-            value: 'B4',
+            value: 'b4',
             label: 'B4',
         },
         {
-            value: 'B5',
+            value: 'b5',
             label: 'B5',
         }
     ]
@@ -97,7 +97,8 @@ export const usePriceTable = () => {
         }
     }
 
-    const handlePaperSizeChange = async () => {
+    const handleApply = async () => {
+        showMore.value = false
         await fetchPrices(selectedSize.value)
     }
 
@@ -132,13 +133,13 @@ export const usePriceTable = () => {
         hasMoreRow,
         listPrices,
 
-        fetchPrices,
-        handlePaperSizeChange,
-
         handleSelectPrice,
         handleMouseLeave,
         handleMouseEnter,
         handleToggleShowMore,
-        handleCheckout
+
+        fetchPrices,
+        handleApply,
+        handleCheckout,
     }
 }

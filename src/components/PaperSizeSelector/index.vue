@@ -9,12 +9,12 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-    change: [paperSize: string]
+    apply: [paperSize: string]
 }>()
 
 
 const handleApply = () => {
-    emit('change', selectedValue.value);
+    emit('apply', selectedValue.value);
 }
 
 // Binding 2 ways

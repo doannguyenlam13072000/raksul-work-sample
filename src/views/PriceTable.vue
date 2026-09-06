@@ -19,8 +19,7 @@ const {
     hasMoreRow,
     listPrices,
 
-    handlePaperSizeChange,
-
+    handleApply,
     handleSelectPrice,
     handleMouseLeave,
     handleMouseEnter,
@@ -35,17 +34,17 @@ const {
         <template #left>
             <paper-size-selector 
                 v-model="selectedSize" 
-                @change="handlePaperSizeChange" 
+                @apply="handleApply" 
                 :options="paperSizes" 
             />
         </template>
 
         <template #right>
             <price-table 
-                :prices="listPrices" 
+                :prices="listPrices"
                 :is-error="isError"
                 :error-msg="errorMsg"
-                :is-loading="isLoading" 
+                :is-loading="isLoading"
                 :selected-price="selectedPrice"
                 :hovered-cell="hoveredCell"
                 @click="handleSelectPrice"
@@ -54,8 +53,8 @@ const {
             />
             <div v-if="hasMoreRow && !isLoading">
                 <see-more-button 
-                    :show-more="showMore" 
-                    @toggle="handleToggleShowMore" 
+                    :show-more="showMore"
+                    @toggle="handleToggleShowMore"
                 />
             </div>
         </template>
