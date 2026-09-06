@@ -70,7 +70,6 @@ const isRowHovered = (row: PriceItem[]) => {
         <!-- Data -->
         <div class="table-wrapper" v-if="!isLoading && prices?.length">
             <table>
-                <!-- <caption class="sr-only">Delivery price table by quantity and business days</caption> -->
                 <thead>
                     <tr>
                         <th>Quantity</th>
@@ -108,47 +107,36 @@ const isRowHovered = (row: PriceItem[]) => {
 }
 
 .table-wrapper {
-    text-align: center;
-    display: flex;
-    justify-content: center;
     margin-top: 1rem;
+}
 
-    table {
-        border-collapse: collapse;
-        border: 0;
-        width: 100%;
-    }
+.table-wrapper table {
+    border-collapse: collapse;
+    border: 0;
+    width: 100%;
+}
 
-    thead {
-        tr {
-            th {
-                position: relative;
-                padding: .5rem 2rem;
-                border: 2px solid var(--border-color);
-                border-radius: .25rem;
-                background-color: var(--background-color);
+.table-wrapper thead tr th {
+    position: relative;
+    padding: .5rem 2rem;
+    border: 2px solid var(--border-color);
+    border-radius: .25rem;
+    background-color: var(--background-color);
+}
 
-                &.badge {
-                    &::before {
-                        position: absolute;
-                        content: '';
-                        top: 0;
-                        left: 0;
-                        border-top: 16px solid var(--primary-color);
-                        border-right: 16px solid transparent;
-                    }
-                }
-            }
-        }
-    }
+.table-wrapper thead tr th.badge::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    border-top: 16px solid var(--primary-color);
+    border-right: 16px solid transparent;
+}
 
-    tbody {
-        td,
-        th {
-            background: var(--background-color);
-            border: 2px solid var(--border-color);
-            border-radius: .25rem;
-        }
-    }
+.table-wrapper tbody td,
+.table-wrapper tbody th {
+    background: var(--background-color);
+    border: 2px solid var(--border-color);
+    border-radius: .25rem;
 }
 </style>

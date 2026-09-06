@@ -45,34 +45,34 @@
 .table-wrapper {
     width: 100%;
     margin-top: 1rem;
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border: 0;
-    }
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 0;
+}
 
-    table tr th,
-    table tr td {
-        height: 48px;
-        background-color: var(--background-color);
-    }
+.table-wrapper table tr th,
+.table-wrapper table tr td {
+    height: 48px;
+    background-color: var(--background-color);
+}
 
-    table thead tr th:first-child {
-        border-top-left-radius: .5rem;
-    }
+.table-wrapper table thead tr th:first-child {
+    border-top-left-radius: .5rem;
+}
 
-    table thead tr th:last-child {
-        border-top-right-radius: .5rem;
-    }
+.table-wrapper table thead tr th:last-child {
+    border-top-right-radius: .5rem;
+}
 
-    table tbody tr:last-child td:first-child {
-        border-bottom-left-radius: .5rem;
-    }
+.table-wrapper table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: .5rem;
+}
 
-    table tbody tr:last-child td:last-child {
-        border-bottom-right-radius: .5rem;
-    }
+.table-wrapper table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: .5rem;
 }
 
 .see-more-wrapper {
@@ -107,6 +107,5 @@
     100% {
         background-position: 0 50%;
     }
-
 }
 </style>
