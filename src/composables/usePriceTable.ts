@@ -9,7 +9,7 @@ export const usePriceTable = () => {
     const hoveredCell = ref<HoveredCell | null>(null)
     const showMore = ref<boolean>(false);
     const selectedPrice = ref<SelectedPrice | null>(null)
-    const selectedSize = ref<string>('b4');
+    const selectedSize = ref<string>('a4');
     const paperSizes = [
         {
             value: 'a4',
