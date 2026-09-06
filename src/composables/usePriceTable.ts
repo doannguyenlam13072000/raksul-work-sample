@@ -28,7 +28,7 @@ export const usePriceTable = () => {
             label: 'B5',
         }
     ]
-    
+
     const data = ref<PriceResponse | null>(null)
     const isLoading = ref<boolean>(false);
     const isError = ref<boolean>(false);
@@ -53,7 +53,7 @@ export const usePriceTable = () => {
     const total = computed(() => {
         if (!selectedPrice.value) return 0;
 
-        return selectedPrice.value.price * selectedPrice.value.business_day;
+        return selectedPrice.value.price * selectedPrice.value.business_day
     })
 
     // DOM events
@@ -62,7 +62,7 @@ export const usePriceTable = () => {
             ...cell
         }
     }
-    
+
     const handleMouseLeave = () => {
         hoveredCell.value = null
     };
@@ -107,18 +107,17 @@ export const usePriceTable = () => {
             data.value = res
         } catch (error) {
             isError.value = true;
-            errorMsg.value = error instanceof Error 
-                ? error.message 
+            errorMsg.value = error instanceof Error
+                ? error.message
                 : 'Something went wrong!';
         } finally {
             isLoading.value = false;
         }
     }
 
-    watch(selectedSize, async (newVal) => {
-
-        fetchPrices(newVal);
-    })
+    const handlePaperSizeChange = async () => {
+        await fetchPrices(selectedSize.value)
+    }
 
     onMounted(() => {
         fetchPrices(selectedSize.value)
@@ -141,6 +140,7 @@ export const usePriceTable = () => {
         total,
 
         fetchPrices,
+        handlePaperSizeChange,
 
         handleSelectPrice,
         handleMouseLeave,

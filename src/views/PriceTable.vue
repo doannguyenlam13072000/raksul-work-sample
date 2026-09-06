@@ -22,6 +22,7 @@ const {
     listPrices,
 
     fetchPrices,
+    handlePaperSizeChange,
 
     handleSelectPrice,
     handleMouseLeave,
@@ -37,7 +38,7 @@ const {
 <template>
     <TwoColumnFooterLayout>
         <template #left>
-            <paper-size-selector v-model="selectedSize" :options="paperSizes" />
+            <paper-size-selector v-model="selectedSize" @change="handlePaperSizeChange" :options="paperSizes" />
         </template>
         <template #right>
             <price-table :data="data" :is-loading="isLoading" />

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { formatNumber } from '../../utils/formatPrice';
+import { formatNumber } from '@/utils/formatNumber';
+
+
 
 defineProps<{
     total: number
