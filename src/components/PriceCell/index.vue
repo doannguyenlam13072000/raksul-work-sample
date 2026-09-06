@@ -31,7 +31,7 @@ const emit = defineEmits<{
         @mouseleave="emit('leave')"
     >
         <button type="button">
-            {{ formatNumber(cell.price) }}¥
+            ¥{{ formatNumber(cell.price) }}
         </button>
     </td>
 </template>
