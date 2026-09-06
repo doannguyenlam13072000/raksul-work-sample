@@ -39,16 +39,17 @@ const emit = defineEmits<{
 <style scoped lang="css">
 .cell {
     &:hover {
-        background: var(--secondary-color) !important;
+        background: var(--primary-color) !important;
     }
     
     &.is-selected {
-        background: var(--primary-color) !important;
+        background: var(--secondary-color) !important;
     }
     
     &.is-row-hovered,
     &.is-col-hovered {
-        background: var(--tertiary-color);
+        background:#c8f8f0;
+        ;
     }
 }
 

@@ -6,7 +6,6 @@ const emit = defineEmits<{
     toggle: []
 }>()
 
-
 </script>
 <template>
     <div class="see-more-wrapper">
@@ -33,26 +32,27 @@ const emit = defineEmits<{
     justify-content: center;
     margin-top: 1rem;
 
-    button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: var(--text-color);
-        width: fit-content;
-        padding: .5rem 2rem;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-        font-weight: bold;
+}
 
-        &:hover {
-            opacity: .7;
-        }
-    }
+button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-color);
+    width: fit-content;
+    padding: .5rem 2rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-    svg {
-        width: 20px;
-        height: 20px;
-    }
+button:hover {
+    opacity: .7;
+}
+
+svg {
+    width: 20px;
+    height: 20px;
 }
 </style>
