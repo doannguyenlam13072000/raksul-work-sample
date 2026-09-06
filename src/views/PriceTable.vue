@@ -3,34 +3,29 @@ import TwoColumnFooterLayout from '../layouts/TwoColumnFooterLayout.vue';
 import PaperSizeSelector from '../components/PaperSizeSelector/index.vue';
 import PriceTable from '../components/PriceTable/index.vue';
 import OrderSummary from '../components/OrderSummary/index.vue';
+import SeeMoreButton from '../components/SeeMoreButton/index.vue';
 import { usePriceTable } from '../composables/usePriceTable.ts';
 
 const {
     selectedPrice,
     hoveredCell,
-    showAll,
+    showMore,
     selectedSize,
     paperSizes,
-
-    data,
     isLoading,
     isError,
     errorMsg,
 
-    total,
     hasMoreRow,
     listPrices,
 
-    fetchPrices,
     handlePaperSizeChange,
 
     handleSelectPrice,
     handleMouseLeave,
     handleMouseEnter,
-
-    isCellHovered,
-    isRowHovered,
-    isColHovered,
+    handleToggleShowMore,
+    handleCheckout
 
 } = usePriceTable();
 </script>
@@ -38,13 +33,39 @@ const {
 <template>
     <TwoColumnFooterLayout>
         <template #left>
-            <paper-size-selector v-model="selectedSize" @change="handlePaperSizeChange" :options="paperSizes" />
+            <paper-size-selector 
+                v-model="selectedSize" 
+                @change="handlePaperSizeChange" 
+                :options="paperSizes" 
+            />
         </template>
+
         <template #right>
-            <price-table :data="data" :is-loading="isLoading" />
+            <price-table 
+                :prices="listPrices" 
+                :is-error="isError"
+                :error-msg="errorMsg"
+                :is-loading="isLoading" 
+                :selected-price="selectedPrice"
+                :hovered-cell="hoveredCell"
+                @click="handleSelectPrice"
+                @enter="handleMouseEnter"
+                @leave="handleMouseLeave"
+            />
+            <div v-if="hasMoreRow && !isLoading">
+                <see-more-button 
+                    :show-more="showMore" 
+                    @toggle="handleToggleShowMore" 
+                />
+            </div>
         </template>
+
         <template #footer>
-            <order-summary :total="total" />
+            <order-summary 
+                :selected-price="selectedPrice"
+                :is-loading="isLoading"
+                @checkout="handleCheckout"
+            />
         </template>
     </TwoColumnFooterLayout>
 </template>

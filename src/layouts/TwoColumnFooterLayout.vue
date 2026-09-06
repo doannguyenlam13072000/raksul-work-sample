@@ -21,7 +21,7 @@
         "left right"
         "footer footer";
     grid-template-columns: 1fr 3fr;
-    gap: 1rem;
+    gap: 2rem;
 
     .left, .right, .footer {
         padding: 1rem;

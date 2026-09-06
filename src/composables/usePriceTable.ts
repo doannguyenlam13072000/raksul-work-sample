@@ -1,4 +1,4 @@
-import { computed, onMounted, ref, watch } from "vue"
+import { computed, onMounted, ref } from "vue"
 import type { PriceResponse, HoveredCell, SelectedPrice, PriceItem } from "../types";
 import { getPaperPrices } from "../apis";
 
@@ -7,7 +7,7 @@ const MAX_ROW = 5;
 export const usePriceTable = () => {
 
     const hoveredCell = ref<HoveredCell | null>(null)
-    const showAll = ref<boolean>(false);
+    const showMore = ref<boolean>(false);
     const selectedPrice = ref<SelectedPrice | null>(null)
     const selectedSize = ref<string>('A4');
     const paperSizes = [
@@ -43,21 +43,20 @@ export const usePriceTable = () => {
     const listPrices = computed(() => {
         if (!data.value) return []
 
-        if (!showAll.value) {
+        if (!showMore.value) {
             return data.value.prices.slice(0, MAX_ROW);
         }
 
         return data.value.prices;
     })
 
-    const total = computed(() => {
-        if (!selectedPrice.value) return 0;
-
-        return selectedPrice.value.price * selectedPrice.value.business_day
-    })
-
     // DOM events
     const handleSelectPrice = (cell: SelectedPrice) => {
+        if (selectedPrice.value?.price === cell.price &&
+            selectedPrice.value.business_day === cell.business_day) {
+            selectedPrice.value = null
+            return
+        }
         selectedPrice.value = {
             ...cell
         }
@@ -74,26 +73,9 @@ export const usePriceTable = () => {
         }
     };
 
-
-    // For class effect
-    const isCellHovered = (currentCell: PriceItem) => {
-        if (!hoveredCell.value) return false
-
-        return hoveredCell.value.quantity === currentCell.quantity
-            && hoveredCell.value.business_day === currentCell.business_day
+    const handleToggleShowMore = () => {
+        showMore.value = !showMore.value
     }
-
-    const isRowHovered = (row: PriceItem[]) => {
-        if (!hoveredCell.value) return false
-
-        return hoveredCell.value.quantity === row[0].quantity
-    };
-
-    const isColHovered = (currentCell: PriceItem) => {
-        if (!hoveredCell.value) return false;
-
-        return hoveredCell.value.business_day === currentCell.business_day;
-    };
 
     // Fetch data
     const fetchPrices = async (paperSize: string) => {
@@ -119,6 +101,19 @@ export const usePriceTable = () => {
         await fetchPrices(selectedSize.value)
     }
 
+    const handleCheckout = async () => {
+        if (!selectedPrice.value) return
+        isLoading.value = true
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(null)
+            }, 1000);
+        })
+        alert('Checkout successfully!')
+
+        isLoading.value = false
+    }
+
     onMounted(() => {
         fetchPrices(selectedSize.value)
     })
@@ -126,18 +121,16 @@ export const usePriceTable = () => {
     return {
         selectedPrice,
         hoveredCell,
-        showAll,
+        showMore,
         selectedSize,
         paperSizes,
 
-        data,
         isLoading,
         isError,
         errorMsg,
 
         hasMoreRow,
         listPrices,
-        total,
 
         fetchPrices,
         handlePaperSizeChange,
@@ -145,9 +138,7 @@ export const usePriceTable = () => {
         handleSelectPrice,
         handleMouseLeave,
         handleMouseEnter,
-
-        isCellHovered,
-        isRowHovered,
-        isColHovered,
+        handleToggleShowMore,
+        handleCheckout
     }
 }
