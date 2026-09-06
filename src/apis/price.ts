@@ -10,7 +10,9 @@ import type { PriceResponse } from "../types";
  * @throws {Error}
  */
 const callApi = async <T = unknown>(url: string, init?: RequestInit): Promise<T> => {
-  const res = await fetch(url, init);
+  const res = init
+    ? await fetch(url, init)
+    : await fetch(url);
 
   if (!res.ok) {
     throw new Error(`API call failed with status ${res.status}: ${res.statusText}`);
@@ -26,7 +28,7 @@ const callApi = async <T = unknown>(url: string, init?: RequestInit): Promise<T>
  * @returns
  * @throws {Error}
  */
-export const getPaperPrices = async (paperSize: string = 'A4'): Promise<PriceResponse | null> => {
+export const getPaperPrices = async (paperSize: string = 'a4'): Promise<PriceResponse | null> => {
   const URL = `https://us-central1-fe-ws-test.cloudfunctions.net/prices?paper_size=${encodeURIComponent(paperSize)}`;
   const data = await callApi<PriceResponse>(URL);
 

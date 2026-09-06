@@ -1,6 +1,6 @@
 import { computed, onMounted, ref } from "vue"
 import type { PriceResponse, HoveredCell, SelectedPrice, PriceItem } from "../types";
-import { getPaperPrices } from "../apis";
+import { getPaperPrices } from "../apis/price";
 
 const MAX_ROW = 5;
 
