@@ -33,6 +33,7 @@ const {
     <TwoColumnFooterLayout>
         <template #left>
             <paper-size-selector 
+                :is-loading="isLoading"
                 v-model="selectedSize" 
                 @apply="handleApply" 
                 :options="paperSizes" 

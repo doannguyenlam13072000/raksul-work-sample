@@ -108,7 +108,7 @@ export const usePriceTable = () => {
         await new Promise((resolve) => {
             setTimeout(() => {
                 resolve(null)
-            }, 1000);
+            }, 2000);
         })
         alert('Checkout successfully!')
 

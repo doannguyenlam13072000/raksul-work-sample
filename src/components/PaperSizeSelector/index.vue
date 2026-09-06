@@ -6,6 +6,7 @@ export interface Option {
 
 defineProps<{
     options: Option[]
+    isLoading: boolean
 }>()
 
 const emit = defineEmits<{
@@ -34,7 +35,16 @@ const selectedValue = defineModel<string>({ required: true })
         </div>
 
         <div class="apply-btn">
-            <button class="btn" @click="handleApply">Apply</button>
+            <button 
+                :disabled="isLoading"
+                class="btn"
+                :class="{
+                    'disabled': isLoading
+                }"
+                @click="handleApply"
+            >
+                Apply
+            </button>
         </div>
     </section>
 </template>
@@ -79,6 +89,12 @@ const selectedValue = defineModel<string>({ required: true })
     padding: .75rem 2rem;
     cursor: pointer;
     font-size: 1rem;
+}
+
+.apply-btn .btn.disabled {
+    pointer-events: none;
+    opacity: .8;
+    background-color: var(--secondary-background-color);
 }
 
 .apply-btn .btn:hover {
